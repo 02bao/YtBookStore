@@ -7,7 +7,7 @@ namespace YtBookStore.Repository.Abstract
         bool Add(Genre model);
         bool Update(Genre model);
         bool Delete(int id);
-        Genre FinById(int id);
+        Genre FindById(int id);
         IEnumerable<Genre> GetAll();
 
     }

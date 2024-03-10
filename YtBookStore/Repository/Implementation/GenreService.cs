@@ -29,7 +29,7 @@ namespace YtBookStore.Repository.Implementation
         {
             try
             {
-                var data = this.FinById(id);
+                var data = this.FindById(id);
                 if(data == null)
                     return false;
                 _context.Remove(data);
@@ -42,7 +42,7 @@ namespace YtBookStore.Repository.Implementation
             }
         }
 
-        public Genre FinById(int id)
+        public Genre FindById(int id)
         {
             return _context.Genre.Find(id);
         }

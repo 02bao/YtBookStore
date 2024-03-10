@@ -37,7 +37,7 @@ namespace YtBookStore.Controllers
 
         public IActionResult Update(int id)
         {
-            var record = _service.FinById(id);
+            var record = _service.FindById(id);
             return View(record);
         }
 
@@ -60,15 +60,16 @@ namespace YtBookStore.Controllers
 
         public IActionResult Delete(int id)
         {
-            
+
             var result = _service.Delete(id);
             return RedirectToAction("GetAll");
         }
 
-        public IActionResult GetAll( )
+        public IActionResult GetAll()
         {
 
             var data = _service.GetAll();
             return View(data);
         }
     }
+}

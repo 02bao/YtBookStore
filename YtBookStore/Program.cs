@@ -13,10 +13,10 @@ namespace YtBookStore
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
             var app = builder.Build();
-            builder.Services.AddScoped<IGenreService, GenreService>();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
