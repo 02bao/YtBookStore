@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using YtBookStore.Models.Domain;
+using YtBookStore.Repository.Abstract;
+using YtBookStore.Repository.Implementation;
 
 namespace YtBookStore
 {
@@ -14,6 +16,7 @@ namespace YtBookStore
             builder.Services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
             var app = builder.Build();
+            builder.Services.AddScoped<IGenreService, GenreService>();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
