@@ -6,11 +6,10 @@ namespace YtBookStore.Controllers
 {
     public class GenreController : Controller
     {
-        private readonly IGenreService _service;
-
+        private readonly IGenreService service;
         public GenreController(IGenreService service)
         {
-            _service = service;
+            this.service = service;
         }
         public IActionResult Add()
         {
@@ -24,10 +23,10 @@ namespace YtBookStore.Controllers
             {
                 return View(model);
             }
-            var result = _service.Add(model);
+            var result = service.Add(model);
             if (result)
             {
-                TempData["msg"] = "Add Successfully";
+                TempData["msg"] = "Added Successfully";
                 return RedirectToAction(nameof(Add));
             }
             TempData["msg"] = "Error has occured on server side";
@@ -37,7 +36,7 @@ namespace YtBookStore.Controllers
 
         public IActionResult Update(int id)
         {
-            var record = _service.FindById(id);
+            var record = service.FindById(id);
             return View(record);
         }
 
@@ -48,28 +47,29 @@ namespace YtBookStore.Controllers
             {
                 return View(model);
             }
-            var result = _service.Update(model);
+            var result = service.Update(model);
             if (result)
             {
-                TempData["msg"] = "Update Successfully";
-                return RedirectToAction(nameof(Add));
+                return RedirectToAction("GetAll");
             }
             TempData["msg"] = "Error has occured on server side";
             return View(model);
         }
 
+
         public IActionResult Delete(int id)
         {
 
-            var result = _service.Delete(id);
+            var result = service.Delete(id);
             return RedirectToAction("GetAll");
         }
 
         public IActionResult GetAll()
         {
 
-            var data = _service.GetAll();
+            var data = service.GetAll();
             return View(data);
         }
+
     }
 }

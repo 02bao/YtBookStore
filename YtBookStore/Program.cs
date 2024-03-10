@@ -1,7 +1,8 @@
+
 using Microsoft.EntityFrameworkCore;
 using YtBookStore.Models.Domain;
+using YtBookStore.Repositories.Implementation;
 using YtBookStore.Repository.Abstract;
-using YtBookStore.Repository.Implementation;
 
 namespace YtBookStore
 {
@@ -13,9 +14,11 @@ namespace YtBookStore
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
+
+            builder.Services.AddScoped<IGenreService, GenreService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,7 +38,7 @@ namespace YtBookStore
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Genre}/{action=Add}/{id?}");
 
             app.Run();
         }

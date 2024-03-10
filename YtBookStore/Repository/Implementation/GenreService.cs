@@ -1,25 +1,24 @@
 ﻿using YtBookStore.Models.Domain;
 using YtBookStore.Repository.Abstract;
 
-namespace YtBookStore.Repository.Implementation
+namespace YtBookStore.Repositories.Implementation
 {
     public class GenreService : IGenreService
     {
-        private readonly DatabaseContext _context;
-
+        private readonly DatabaseContext context;
         public GenreService(DatabaseContext context)
         {
-            _context = context;
+            this.context = context;
         }
         public bool Add(Genre model)
         {
             try
             {
-                _context.Genre.Add(model);
-                _context.SaveChanges();
+                context.Genre.Add(model);
+                context.SaveChanges();
                 return true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return false;
             }
@@ -30,10 +29,10 @@ namespace YtBookStore.Repository.Implementation
             try
             {
                 var data = this.FindById(id);
-                if(data == null)
+                if (data == null)
                     return false;
-                _context.Remove(data);
-                _context.SaveChanges();
+                context.Genre.Remove(data);
+                context.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -44,20 +43,20 @@ namespace YtBookStore.Repository.Implementation
 
         public Genre FindById(int id)
         {
-            return _context.Genre.Find(id);
+            return context.Genre.Find(id);
         }
 
         public IEnumerable<Genre> GetAll()
         {
-            return _context.Genre.ToList();
+            return context.Genre.ToList();
         }
 
         public bool Update(Genre model)
         {
             try
             {
-                _context.Genre.Update(model);
-                _context.SaveChanges();
+                context.Genre.Update(model);
+                context.SaveChanges();
                 return true;
             }
             catch (Exception ex)
